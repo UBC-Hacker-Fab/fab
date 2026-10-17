@@ -1,0 +1,12 @@
+[package]
+name = "messaging"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+postcard = "=1.1.3"
+serde = { version = "1", default-features = false, features = ["derive"] }
+paste = "=1.0.15"
+
+[features]
+std = ["postcard/use-std"]

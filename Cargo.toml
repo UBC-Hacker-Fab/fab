@@ -7,7 +7,7 @@ edition = "2024"
 license = "GPL-3.0-or-later"
 
 [workspace.dependencies]
-comms = { path = "crates/comms" }
+communication = { path = "crates/communication" }
 cortex-m = { version = "0.7.7", features = ["inline-asm"] }
 cortex-m-rt = "0.7.5"
 cyw43 = { version = "0.7.0", features = ["defmt"] }

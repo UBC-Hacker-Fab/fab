@@ -3,7 +3,7 @@
 #![no_std]
 #![no_main]
 
-use comms::Message;
+use communication::Message;
 use defmt::info;
 use embassy_executor::Spawner;
 use embassy_time::Timer;

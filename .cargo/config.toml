@@ -8,8 +8,8 @@ runner = "picotool load -uvx -t elf" # USB
 
 [alias]
 lint = ["clippy", "--workspace", "--bins", "--examples", "--", "-D", "warnings"]
-lint-host = ["clippy", "--target", "host-tuple", "-p", "comms", "--all-targets", "--", "-D", "warnings"]
-test-host = "test --target host-tuple -p comms"
+lint-host = ["clippy", "--target", "host-tuple", "-p", "communication", "--all-targets", "--", "-D", "warnings"]
+test-host = "test --target host-tuple -p communication"
 
 [env]
 DEFMT_LOG = "debug"

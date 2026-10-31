@@ -1,0 +1,3 @@
+[check]
+allTargets = false
+extraArgs = ["--lib", "--bins", "--examples"]

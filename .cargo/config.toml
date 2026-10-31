@@ -3,8 +3,13 @@ target = "thumbv8m.main-none-eabihf"
 
 [target.thumbv8m.main-none-eabihf]
 # Uncomment the line for which flash method you are using
-runner = "picotool load -uvxt elf" # USB
+runner = "picotool load -uvx -t elf" # USB
 # runner = "probe-rs run --chip RP235x" # Debug probe
+
+[alias]
+lint = ["clippy", "--workspace", "--bins", "--examples", "--", "-D", "warnings"]
+lint-host = ["clippy", "--target", "host-tuple", "-p", "comms", "--all-targets", "--", "-D", "warnings"]
+test-host = "test --target host-tuple -p comms"
 
 [env]
 DEFMT_LOG = "debug"

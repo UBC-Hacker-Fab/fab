@@ -1,0 +1,17 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+edition = "2024"
+license = "GPL-3.0-or-later"
+
+[workspace.dependencies]
+
+[profile.release]
+debug = "full"
+lto = true
+codegen-units = 1
+# Can be changed but most will be using the regular dev profile unless
+# `--release` is explicitly passed
+opt-level = "s"

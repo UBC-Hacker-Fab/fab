@@ -1,0 +1,26 @@
+name: Linux CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Format
+        run: nix flake check
+
+      - name: Lint
+        run: nix develop -c cargo lint
+
+      - name: Lint host crates
+        run: nix develop -c cargo lint-host
+
+      - name: Unit tests
+        run: nix develop -c cargo test-host

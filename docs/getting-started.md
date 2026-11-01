@@ -18,7 +18,7 @@ sudo apt install nix
 
 ##### Other
 
-Install via your systems package manager.
+Install via your system's package manager.
 
 #### MacOS
 

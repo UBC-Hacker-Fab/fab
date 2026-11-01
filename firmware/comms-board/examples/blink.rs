@@ -8,7 +8,7 @@ use embassy_time::Timer;
 
 #[embassy_executor::main]
 async fn main(spawner: Spawner) {
-    let mut control = firmware::init(spawner).await;
+    let mut control = comms_board::init(spawner).await;
 
     loop {
         control.gpio_set(0, true).await;

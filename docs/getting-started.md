@@ -62,7 +62,7 @@ picotool version # This should print 2.3.1
 
 > TODO: Update
 
-Put hardware specific stuff in crates/firmware
+Put hardware specific stuff in the `firmware/` workspace
 
 Put platform independent stuff in other crates
 

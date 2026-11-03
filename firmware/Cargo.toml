@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["comms-board"]
+members = ["comms-board", "tube-furnace"]
 
 [workspace.package]
 edition = "2024"
@@ -8,6 +8,7 @@ license = "GPL-3.0-or-later"
 
 [workspace.dependencies]
 communication = { path = "../crates/communication" }
+tube-furnace = { path = "../crates/tube-furnace" }
 cortex-m = { version = "0.7.7", features = ["inline-asm"] }
 cortex-m-rt = "0.7.5"
 cyw43 = { version = "0.7.0", features = ["defmt"] }

@@ -6,8 +6,6 @@ pub use serde;
 
 use postcard::ser_flavors::{Cobs, Slice, crc::CrcModifier};
 
-use crate::macros::{message, message_traits};
-
 mod macros;
 
 static CRC32: Crc<u32> = Crc::<u32>::new(&CRC_32_ISCSI);

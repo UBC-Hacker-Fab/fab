@@ -1,3 +1,4 @@
+#[macro_export]
 macro_rules! message_traits {
     ($($item:item)*) => {
         $(
@@ -6,8 +7,8 @@ macro_rules! message_traits {
         )*
     };
 }
-pub(crate) use message_traits;
 
+#[macro_export]
 macro_rules! message {
     ($vis:vis $message:ident { $($rest:tt)* }) => {
         paste::paste! {
@@ -71,7 +72,6 @@ macro_rules! message {
         message!(@indices $traitname, $i + 1usize; $($tail)*);
     };
 }
-pub(crate) use message;
 
 #[cfg(test)]
 mod tests;

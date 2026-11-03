@@ -1,0 +1,12 @@
+[package]
+name = "server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix-web = { version = "4.18.1", features = ["rustls"] }
+futures = "0.3.34"
+messaging = { path = "../messaging"}
+serde = { version = "1.0.229", features = ["serde_derive"] }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "time", "macros"] }
+tokio-rustls = "0.26.6"

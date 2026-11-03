@@ -67,3 +67,5 @@ Put hardware specific stuff in the `firmware/` workspace
 Put platform independent stuff in other crates
 
 Example already showing how unit testing is easy with this pattern.
+
+See [Adding a Tool](adding-a-tool.md) for how to set up a new tool.

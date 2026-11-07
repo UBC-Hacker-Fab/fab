@@ -1,0 +1,28 @@
+[package]
+name = "comms-board"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+communication.workspace = true
+cortex-m.workspace = true
+cortex-m-rt.workspace = true
+cyw43.workspace = true
+cyw43-pio.workspace = true
+defmt.workspace = true
+defmt-rtt.workspace = true
+embassy-executor.workspace = true
+embassy-rp.workspace = true
+embassy-time.workspace = true
+panic-probe.workspace = true
+static_cell.workspace = true
+
+[lib]
+test = false
+bench = false
+
+[[bin]]
+name = "comms-board"
+test = false
+bench = false

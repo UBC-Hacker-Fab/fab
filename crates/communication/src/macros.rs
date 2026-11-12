@@ -1,7 +1,7 @@
 macro_rules! message_derives {
     ($($item:item)*) => {
         $(
-        #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+        #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, postcard::experimental::max_size::MaxSize)]
             $item
         )*
     };
@@ -11,13 +11,14 @@ pub(crate) use message_derives;
 macro_rules! message {
     ($vis:vis $message:ident { $($rest:tt)* }) => {
         paste::paste! {
-            message!($vis $message : [<$message Trait>] { $($rest)* });
+            $crate::macros::message!($vis $message : [<$message Trait>] { $($rest)* });
         }
     };
     ($vis:vis $message:ident : $traitname:ident { $($name:ident),* $(,)? }) => {
-        #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
-        $vis enum $message {
-            $( $name($name), )*
+        $crate::macros::message_derives! {
+            $vis enum $message {
+                $( $name($name), )*
+            }
         }
 
         impl $message {
@@ -47,7 +48,7 @@ macro_rules! message {
         }
 
         // Assign INDEX.
-        message!(@indices $traitname, 0usize; $($name)*);
+        $crate::macros::message!(@indices $traitname, 0usize; $($name)*);
 
         $(
             impl From<$name> for $message { fn from(v: $name) -> $message { $message::$name(v) } }
@@ -68,7 +69,7 @@ macro_rules! message {
             const NAME: &'static str = stringify!($head);
             const INDEX: usize = $i;
         }
-        message!(@indices $traitname, $i + 1usize; $($tail)*);
+        $crate::macros::message!(@indices $traitname, $i + 1usize; $($tail)*);
     };
 }
 pub(crate) use message;

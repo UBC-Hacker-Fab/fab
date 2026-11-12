@@ -10,7 +10,11 @@ pub mod tool_messages;
 
 static CRC32: Crc<u32> = Crc::<u32>::new(&CRC_32_ISCSI);
 
-pub use postcard::{from_bytes_cobs, to_slice_cobs};
+pub use postcard::experimental::max_size::MaxSize;
+
+pub const fn cobs_crc32_buf_len<T: MaxSize>() -> usize {
+    cobs::max_encoding_length(T::POSTCARD_MAX_SIZE + size_of::<u32>()) + 1
+}
 
 pub fn to_slice_cobs_crc32<'a, T: serde::Serialize>(
     value: &T,
@@ -31,10 +35,9 @@ pub fn from_slice_cobs_crc32<'a, T: serde::Deserialize<'a>>(
 
 #[cfg(test)]
 mod tests {
+    #![allow(dead_code)]
 
-    use crate::macros::{message, message_derives};
-
-    message_derives! {
+    crate::macros::message_derives! {
         pub enum Test1 {
             A,
             B,
@@ -48,7 +51,7 @@ mod tests {
         }
     }
 
-    message! {
+    crate::macros::message! {
         pub TestMessage {
             Test1,
             Test2

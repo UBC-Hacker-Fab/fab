@@ -31,6 +31,7 @@ pub fn from_slice_cobs_crc32<'a, T: serde::Deserialize<'a>>(
 
 #[cfg(test)]
 mod tests {
+    #![allow(dead_code)]
 
     use crate::macros::{message, message_derives};
 

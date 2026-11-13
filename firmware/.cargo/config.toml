@@ -1,0 +1,10 @@
+[build]
+target = "thumbv8m.main-none-eabihf"
+
+[target.thumbv8m.main-none-eabihf]
+# Uncomment the line for which flash method you are using
+runner = "picotool load -uvx -t elf" # USB
+# runner = "probe-rs run --chip RP235x" # Debug probe
+
+[env]
+DEFMT_LOG = "debug"

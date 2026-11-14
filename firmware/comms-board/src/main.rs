@@ -3,10 +3,13 @@
 #![no_std]
 #![no_main]
 
-use communication::Message;
+use communication::tool_messages::{TestPing, ToolTestMessage};
+use communication::{cobs_crc32_buf_len, to_slice_cobs_crc32};
 use defmt::info;
 use embassy_executor::Spawner;
 use embassy_time::Timer;
+
+const BUF_LEN: usize = cobs_crc32_buf_len::<ToolTestMessage>();
 
 #[embassy_executor::main]
 async fn main(spawner: Spawner) {
@@ -14,7 +17,9 @@ async fn main(spawner: Spawner) {
 
     let mut counter: u8 = 0;
     loop {
-        let bytes = Message { counter }.pack();
+        let mut buf = [0u8; BUF_LEN];
+        let msg = ToolTestMessage::from(TestPing::Ping(counter));
+        let bytes = to_slice_cobs_crc32(&msg, &mut buf).expect("buffer fits message");
         info!("sending {=[u8]:x}", bytes);
 
         control.gpio_set(0, true).await;

@@ -1,0 +1,10 @@
+# The firmware crates live in their own cargo workspace (excluded from the root
+# one), so rust-analyzer won't find them from the repo root unless told to.
+[language-server.rust-analyzer.config]
+linkedProjects = ["Cargo.toml", "firmware/Cargo.toml"]
+
+[language-server.rust-analyzer.config.cargo]
+allTargets = false
+
+[language-server.rust-analyzer.config.check]
+allTargets = false

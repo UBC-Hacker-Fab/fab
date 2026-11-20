@@ -1,5 +1,8 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 
+use crate::state;
+use std::sync::RwLock;
+
 #[get("/")]
 async fn hello() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
@@ -14,7 +17,7 @@ async fn manual_hello() -> impl Responder {
     HttpResponse::Ok().body("Hey there!")
 }
 
-pub async fn interface() -> std::io::Result<()> {
+pub async fn interface(tools: &RwLock<Vec<RwLock<Option<state::Tool>>>>) -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(hello)
